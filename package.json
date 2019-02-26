@@ -15,7 +15,7 @@
     "video.js": "^7.4.1"
   },
   "main": "src/electron-starter.js",
-  "homepage": "./",
+  "homepage": "./home",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -36,6 +36,7 @@
   ],
   "devDependencies": {
     "electron": "^4.0.5",
+    "electron-packager": "^13.1.0",
     "foreman": "^3.0.1"
   }
 }
