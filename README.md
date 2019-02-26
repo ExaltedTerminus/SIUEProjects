@@ -9,3 +9,5 @@ To run electron + react:
 To run just react:
 
 `npm start`
+
+To create a Windows installer, use InnoSetup.
