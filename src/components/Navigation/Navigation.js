@@ -19,6 +19,12 @@ class Navigation extends Component {
             Home
           </Link>
           <Link
+            className="bp3-button bp3-minimal bp3-icon-full-stacked-chart"
+            to="/"
+          >
+            Modules
+          </Link>
+          <Link
             className="bp3-button bp3-minimal bp3-icon-build"
             icon="document"
             to="/testingpage"
