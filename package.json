@@ -36,6 +36,7 @@
   ],
   "devDependencies": {
     "electron": "^4.0.5",
+    "electron-devtools-installer": "^2.2.4",
     "electron-packager": "^13.1.0",
     "foreman": "^3.0.1"
   }
