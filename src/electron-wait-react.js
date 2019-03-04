@@ -20,5 +20,5 @@ const tryConnection = () =>
 tryConnection();
 
 client.on("error", error => {
-  setTimeout(tryConnection, 1000);
+  setTimeout(tryConnection, 2000);
 });
