@@ -14,7 +14,7 @@ To run just react:
 
 To create executables:
 
-`npm run build-exe'
+`npm run build-exe`
 
 This will build executables for all platforms currently supported by [electron-packager](https://github.com/electron-userland/electron-packager).
 
