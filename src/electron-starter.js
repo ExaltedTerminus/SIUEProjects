@@ -1,4 +1,5 @@
 const electron = require("electron");
+const { Menu, shell, dialog } = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
@@ -12,6 +13,23 @@ const {
 
 let mainWindow;
 
+let menuTemplate = [
+  {
+    label: "Tools",
+    submenu: [
+      {
+        label: "Calculator",
+        
+      },
+      {
+        label: "Screenshot",
+        accelerator: "Shift+CmdorCtrl+S",
+        role: "screenshooter"
+      }
+    ]
+  }
+];
+
 function createWindow() {
   mainWindow = new BrowserWindow({ width: 1240, height: 720 });
 
@@ -24,7 +42,8 @@ function createWindow() {
     });
   mainWindow.loadURL(startUrl);
 
-  //mainWindow.setMenu(null);
+  const menu = Menu.buildFromTemplate(menuTemplate);
+  mainWindow.setMenu(menu);
 
   mainWindow.webContents.openDevTools();
 
