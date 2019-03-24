@@ -5,6 +5,9 @@ const BrowserWindow = electron.BrowserWindow;
 
 const path = require("path");
 const url = require("url");
+const os = require("os");
+const fs = require("fs");
+
 const {
   default: installExtension,
   REACT_DEVELOPER_TOOLS,
@@ -18,13 +21,19 @@ let menuTemplate = [
     label: "Tools",
     submenu: [
       {
-        label: "Calculator",
-        
-      },
-      {
         label: "Screenshot",
         accelerator: "Shift+CmdorCtrl+S",
-        role: "screenshooter"
+        role: "screenshooter",
+        click: () => {
+          // Need to configure where to save screenshot
+          mainWindow.capturePage(image => {
+            fs.writeFile("test.png", image.toPNG(), err => {
+              if (err) throw err;
+              console.log("Screenshot saved!");
+              shell.openExternal("test.png");
+            });
+          });
+        }
       }
     ]
   }
