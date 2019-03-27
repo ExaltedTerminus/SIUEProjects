@@ -24,7 +24,7 @@
     "electron": "electron .",
     "electron-dev": "ELECTRON_START_URL=http://localhost:3000 electron .",
     "dev": "nf start",
-    "build-exe": "./node_modules/electron-packager/cli.js . AccountingChallenge --all"
+    "build-exe": "./node_modules/electron-packager/cli.js . AccountingChallenge --all --out='builds'"
   },
   "eslintConfig": {
     "extends": "react-app"
