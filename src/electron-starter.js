@@ -14,6 +14,24 @@ const {
   REDUX_DEVTOOLS
 } = require("electron-devtools-installer");
 
+let calcTemplate = [
+  {
+    Label: "Actions",
+    submenu: [
+      {
+        label: "Reload",
+        accelerator: 'CmdOrCtrl+R',
+        role: "refresh",
+        click: (focusedWindow) => {
+          if(focusedWindow) {
+            focusedWindow.reload()
+          }
+        }
+      }
+    ]
+
+}]
+
 let mainWindow;
 
 let menuTemplate = [
@@ -25,7 +43,7 @@ let menuTemplate = [
         accelerator: "Shift+CmdorCtrl+S",
         role: "screenshooter",
         click: () => {
-          // Need to configure where to save screenshot
+          // Need to configure where to save screenshot via a dialog event
           mainWindow.capturePage(image => {
             fs.writeFile("test.png", image.toPNG(), err => {
               if (err) throw err;
@@ -33,6 +51,20 @@ let menuTemplate = [
               shell.openExternal("test.png");
             });
           });
+        }
+      },
+      {
+        label: "Calculator",
+        role: "inappCalculator",
+        click: () => {
+          // Use the pwindow and spawn a new view for just the calculator itself.
+          let win = new BrowserWindow({width: 200, height: 300});
+
+          const calcMenu = Menu.buildFromTemplate(calcTemplate);
+          win.setMenu(calcMenu);
+          win.on("close", () => {win = null});
+          // create the url for the calculator
+          win.show();
         }
       }
     ]
