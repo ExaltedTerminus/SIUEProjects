@@ -6,6 +6,7 @@
     "@blueprintjs/core": "^3.13.0",
     "@blueprintjs/icons": "^3.6.0",
     "@blueprintjs/table": "^3.4.1",
+    "electron-devtools-installer": "^2.2.4",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-responsive": "^6.1.1",
@@ -37,7 +38,6 @@
   ],
   "devDependencies": {
     "electron": "^4.0.5",
-    "electron-devtools-installer": "^2.2.4",
     "electron-packager": "^13.1.0",
     "foreman": "^3.0.1"
   }
