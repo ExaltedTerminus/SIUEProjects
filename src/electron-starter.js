@@ -1,5 +1,5 @@
 const electron = require("electron");
-const { Menu, shell, dialog } = require("electron");
+const { Menu, dialog, Notification } = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
@@ -16,21 +16,21 @@ const {
 
 let calcTemplate = [
   {
-    Label: "Actions",
+    label: "Actions",
     submenu: [
       {
         label: "Reload",
-        accelerator: 'CmdOrCtrl+R',
-        role: "refresh",
-        click: (focusedWindow) => {
-          if(focusedWindow) {
-            focusedWindow.reload()
+        accelerator: "CmdOrCtrl+R",
+        role: "reload",
+        click: focusedWindow => {
+          if (focusedWindow) {
+            focusedWindow.reload();
           }
         }
       }
     ]
-
-}]
+  }
+];
 
 let mainWindow;
 
@@ -41,28 +41,40 @@ let menuTemplate = [
       {
         label: "Screenshot",
         accelerator: "Shift+CmdorCtrl+S",
-        role: "screenshooter",
         click: () => {
-          // Need to configure where to save screenshot via a dialog event
-          mainWindow.capturePage(image => {
-            fs.writeFile("test.png", image.toPNG(), err => {
-              if (err) throw err;
-              console.log("Screenshot saved!");
-              shell.openExternal("test.png");
-            });
+          const options = {
+            title: "Save Screenshot",
+            filters: [{ name: "Images", extensions: ["jpg", "png", "gif"] }]
+          };
+          dialog.showSaveDialog(options, filename => {
+            if (filename) {
+              mainWindow.capturePage(image => {
+                fs.writeFile(filename, image.toPNG(), err => {
+                  if (err) throw err;
+                  console.log("Screenshot saved to ${filename}");
+                  //shell.openExternal(filename);
+                });
+              });
+            }
           });
         }
       },
       {
         label: "Calculator",
-        role: "inappCalculator",
+        accelerator: "Shift+CmdorCtrl+C",
         click: () => {
           // Use the pwindow and spawn a new view for just the calculator itself.
-          let win = new BrowserWindow({width: 200, height: 300});
+          let win = new BrowserWindow({
+            width: 200,
+            height: 300,
+            parent: mainWindow
+          });
 
           const calcMenu = Menu.buildFromTemplate(calcTemplate);
           win.setMenu(calcMenu);
-          win.on("close", () => {win = null});
+          win.on("close", () => {
+            win = null;
+          });
           // create the url for the calculator
           win.show();
         }
