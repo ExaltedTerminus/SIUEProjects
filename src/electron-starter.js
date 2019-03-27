@@ -65,17 +65,19 @@ let menuTemplate = [
         click: () => {
           // Use the pwindow and spawn a new view for just the calculator itself.
           let win = new BrowserWindow({
-            width: 200,
-            height: 300,
+            width: 415,
+            height: 595,
             parent: mainWindow
           });
+
+          const calcURL = `file://${__dirname}/calculator/index.html`;
 
           const calcMenu = Menu.buildFromTemplate(calcTemplate);
           win.setMenu(calcMenu);
           win.on("close", () => {
             win = null;
           });
-          // create the url for the calculator
+          win.loadURL(calcURL);
           win.show();
         }
       }
@@ -97,8 +99,6 @@ function createWindow() {
 
   const menu = Menu.buildFromTemplate(menuTemplate);
   mainWindow.setMenu(menu);
-
-  mainWindow.webContents.openDevTools();
 
   mainWindow.on("closed", function() {
     mainWindow = null;
