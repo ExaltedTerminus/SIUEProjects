@@ -4,7 +4,8 @@ import { RouteContainer, DivStyle, NavContainer } from "./RoutesComponents";
 import TestingPage from "../TestComponents/TestingPage";
 import Home from "../Home/Home";
 import Navigation from "../Navigation/Navigation";
-import QuestContainer from "../Quiz/QuestContainer";
+import ClearStore from "../ModuleSelector/ClearStore";
+import ModuleSelector from "../ModuleSelector/ModuleContainer";
 
 class Routes extends Component {
   render() {
@@ -18,8 +19,9 @@ class Routes extends Component {
               </NavContainer>
 
               <Route exact path="/" component={Home} />
+              <Route path="/modulecontainer" component={ModuleSelector} />
               <Route path="/testingpage" component={TestingPage} />
-              <Route path="/questcontainer" component={QuestContainer} />
+              <Route path="/clearstore" component={ClearStore} />
             </div>
           </DivStyle>
         </Router>

@@ -9,7 +9,7 @@ const RadioStyle = styled.div`
 
 const RadioChkChoices = props => {
   function renderRadioOptions(key) {
-    return <Radio id={key.type} label={key.content} value={key.id} />;
+    return <Radio key={key.id} label={key.content} value={key.id} />;
   }
   function renderChkOptions(key, index) {
     return (

@@ -20,7 +20,7 @@ const CheckStyle = styled.div`
 `;
 
 const ChoiceResults = props => {
-  var selectedValue = "";
+  var selectedValue;
   function getIcon(answer, selected) {
     if (answer) {
       return <Icon icon="tick" intent="success" />;
@@ -81,7 +81,6 @@ const ChoiceResults = props => {
     }
   }
   function renderChkRad() {
-    console.log(props.qSelections);
     if (props.qType === "radio") {
       return <div>{props.answerOptions.map(renderRadioStyle)}</div>;
     } else {

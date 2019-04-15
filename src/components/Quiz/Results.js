@@ -3,33 +3,9 @@ import ChoiceResults from "./ChoiceResults";
 import Correctness from "./Correctness";
 import QuestionCount from "./QuestionCount";
 import { Card } from "@blueprintjs/core";
-import styled from "styled-components";
-
-const SpacerStyle = styled.div`
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin: auto;
-`;
 
 const Results = props => {
   function renderQuestion(i) {
-    /*
-    return (
-      <React-Fragment>
-        <Card>
-          
-        </Card>
-        <SpacerStyle />
-      </React-Fragment>
-      /*
-          <ChoiceResults
-            answers={props.quizQuestions[i].answer}
-            qState={props.quizSelections[i]}
-            options={props.quizQuestions[i].options}
-            counter={i}
-          />
-    );*/
-
     return (
       <React-Fragment>
         <Card>
