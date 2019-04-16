@@ -23,6 +23,7 @@ const ModuleButton = props => {
   function renderComplete() {
     return (
       <Button
+        id={props.title_name.replace("Module ", "")}
         className="bp3-fill "
         intent={"success"}
         onClick={props.onPastModule}
@@ -32,7 +33,6 @@ const ModuleButton = props => {
     );
   }
   function renderCurrent() {
-    console.log(props.title_name.replace("Module ", ""));
     return (
       <Button
         id={props.title_name.replace("Module ", "")}

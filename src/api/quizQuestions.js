@@ -1,4 +1,5 @@
 var quizQuestions = [
+  //module 1
   [
     {
       question:
@@ -122,6 +123,7 @@ var quizQuestions = [
       explain: ""
     }
   ],
+  //module 2
   [
     {
       question:
@@ -191,7 +193,155 @@ var quizQuestions = [
       answer: ["y1"],
       explain: "stuff"
     }
+  ],
+  //module 3
+  [
+    {
+      question:
+        "When computing the present value, the interest rate will vary depending on the amount of risk. Riskier investments, such as stock investments, command higher interest rates.",
+      type: "radio",
+      options: [
+        {
+          content: "TRUE",
+          id: "a1"
+        },
+        {
+          content: "FALSE",
+          id: "a2"
+        }
+      ],
+      answer: ["a1"],
+      explain: ""
+    },
+    {
+      question:
+        "When computing the present value, the interest rate will vary depending on the amount of risk. Safer investments, such as FDIC-insured bank deposits, yield lower interest rates.",
+      type: "radio",
+      options: [
+        {
+          content: "TRUE",
+          id: "b1"
+        },
+        {
+          content: "FALSE",
+          id: "b2"
+        }
+      ],
+      answer: ["b1"],
+      explain: ""
+    }
+  ],
+  //module 4
+  [
+    {
+      question:
+        "Today, Thomas deposited $100,000 in a three-year, 12% CD that compounds quarterly. What is the maturity value of the CD?",
+      type: "radio",
+      options: [
+        {
+          content: "$109,270.",
+          id: "a1"
+        },
+        {
+          content: "$119,410.",
+          id: "a2"
+        },
+        {
+          content: "$142,576.",
+          id: "a3"
+        },
+        {
+          content: "$309,090.",
+          id: "a4"
+        }
+      ],
+      answer: ["a3"],
+      explain: ""
+    },
+    {
+      question:
+        "At the end of each quarter, Patti deposits $500 into an account that pays 12% interest compounded quarterly. How much will Patti have in the account in three years?",
+      type: "radio",
+      options: [
+        {
+          content: "$7,096.",
+          id: "b1"
+        },
+        {
+          content: "$7,213.",
+          id: "b2"
+        },
+        {
+          content: "$7,129.",
+          id: "b3"
+        },
+        {
+          content: "$8,880",
+          id: "b4"
+        }
+      ],
+      answer: ["b1"],
+      explain: ""
+    }
+  ][
+    //module 5
+    //5:1
+    ({
+      question:
+        "The following formula is used to compute the present value of a lump sum: Future value = Present value × PV factor for i = X%, n = Y periods",
+      type: "radio",
+      options: [
+        {
+          content: "TRUE",
+          id: "a1"
+        },
+        {
+          content: "FALSE",
+          id: "a2"
+        }
+      ],
+      answer: ["a2"],
+      explain: ""
+    },
+    //5:2
+    {
+      question:
+        "You want to sell your share of an investment to Howard for $50,000 in three years. If money is worth 6% compounded semiannually, what would you accept today?",
+      type: "radio",
+      options: [
+        {
+          content: "$8,375.",
+          id: "b1"
+        },
+        {
+          content: "$41,874.",
+          id: "b2"
+        },
+        {
+          content: "$11,941.",
+          id: "b3"
+        },
+        {
+          content: "$41,000.",
+          id: "b4"
+        }
+      ],
+      answer: ["b2"],
+      explain: ""
+    })
+    //5:3
+    //5:4
+    //5:5
+    //5:6
+    //5:7
+    //5:8
+    //5:9
   ]
+  //module 6
+  //module 7
+  //module 8
+  //module 9
+  //module 10
 ];
 function getQuiz(x) {
   return quizQuestions[x];
