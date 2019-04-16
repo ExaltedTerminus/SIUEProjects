@@ -25,13 +25,6 @@ class Navigation extends Component {
             Modules
           </Link>
           <Link
-            className="bp3-button bp3-minimal bp3-icon-build"
-            icon="document"
-            to="/testingpage"
-          >
-            Testing Page
-          </Link>
-          <Link
             className="bp3-button bp3-minimal bp3-icon-application"
             icon="application"
             to="/clearstore"
