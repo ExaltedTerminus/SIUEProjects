@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import quizQuestions from "../../api/quizQuestions";
+import getQuiz from "../../api/quizQuestions";
 import Quiz from "../../components/Quiz/Quiz";
 import Results from "./Results";
 import QuizNav from "../Quiz/QuizNav";
-
 import { Card } from "@blueprintjs/core";
-
+const Store = window.require("electron-store");
 const QuestStyle = styled.div`
   @media (min-width: 1000px) {
     width: 70%;
@@ -17,7 +16,6 @@ const QuestStyle = styled.div`
   margin: auto;
   padding-top: 2%;
 `;
-
 class QuestContainer extends Component {
   constructor(props) {
     super(props);
@@ -33,7 +31,9 @@ class QuestContainer extends Component {
       buttonDisabled: true,
       selections: [],
       questionType: "",
-      questionState: []
+      questionState: [],
+      quizQuestions: [],
+      quizNum: 0
     };
 
     this.handleNextButton = this.handleNextButton.bind(this);
@@ -42,6 +42,9 @@ class QuestContainer extends Component {
   }
 
   componentWillMount() {
+    const store = new Store();
+
+    var quizQuestions = getQuiz(this.props.quizNum - 1);
     const optionsObjArr = quizQuestions[0].options;
 
     const questionState = this.initQuestionState(optionsObjArr);
@@ -50,12 +53,14 @@ class QuestContainer extends Component {
       questionOptions: optionsObjArr,
       questionAnswer: quizQuestions[0].answer,
       questionType: quizQuestions[0].type,
-      questionState: questionState
+      questionState: questionState,
+      quizQuestions: quizQuestions,
+      quizNum: this.props.quizNum
     });
   }
 
   handleNextButton(event) {
-    if (this.state.questionId < quizQuestions.length) {
+    if (this.state.questionId < this.state.quizQuestions.length) {
       this.setNextQuestion();
     } else {
       var selections = this.deepCopySelections(this.state.selections);
@@ -94,15 +99,15 @@ class QuestContainer extends Component {
   handlePreviousButton() {
     const counter = this.state.counter - 1;
     const questionId = this.state.questionId - 1;
-    const questionType = quizQuestions[counter].type;
-    const questionOptions = quizQuestions[counter].options;
+    const questionType = this.state.quizQuestions[counter].type;
+    const questionOptions = this.state.quizQuestions[counter].options;
     const questionState = this.deepCopyState(this.state.selections[counter]);
     this.setState({
       counter: counter,
       questionId: questionId,
-      questionTitle: quizQuestions[counter].question,
+      questionTitle: this.state.quizQuestions[counter].question,
       questionOptions: questionOptions,
-      questionAnswer: quizQuestions[counter.answer],
+      questionAnswer: this.state.quizQuestions[counter.answer],
       questionType: questionType,
       buttonDisabled: false,
       questionState: questionState
@@ -137,17 +142,19 @@ class QuestContainer extends Component {
       questionState = this.deepCopyState(selections[counter]);
       buttonDisabled = false;
     } else {
-      questionState = this.initQuestionState(quizQuestions[counter].options);
+      questionState = this.initQuestionState(
+        this.state.quizQuestions[counter].options
+      );
       buttonDisabled = true;
     }
     const questionId = this.state.questionId + 1;
     this.setState({
       counter: counter,
       questionId: questionId,
-      questionTitle: quizQuestions[counter].question,
-      questionOptions: quizQuestions[counter].options,
-      questionAnswer: quizQuestions[counter].answer,
-      questionType: quizQuestions[counter].type,
+      questionTitle: this.state.quizQuestions[counter].question,
+      questionOptions: this.state.quizQuestions[counter].options,
+      questionAnswer: this.state.quizQuestions[counter].answer,
+      questionType: this.state.quizQuestions[counter].type,
       questionState: questionState,
       buttonDisabled: buttonDisabled,
       selections: selections
@@ -160,7 +167,7 @@ class QuestContainer extends Component {
         <Quiz
           answerOptions={this.state.questionOptions}
           currentNumQ={this.state.questionId}
-          totalNumQ={quizQuestions.length}
+          totalNumQ={this.state.quizQuestions.length}
           qTitle={this.state.questionTitle}
           qID={this.state.questionId}
           qType={this.state.questionType}
@@ -173,7 +180,7 @@ class QuestContainer extends Component {
           onPreviousClick={this.handlePreviousButton}
           buttonMode={this.state.buttonDisabled}
           counter={this.state.counter}
-          questionTotal={quizQuestions.length}
+          questionTotal={this.state.quizQuestions.length}
         />
       </React-Fragment>
     );
@@ -209,6 +216,7 @@ class QuestContainer extends Component {
 
   tempfunc(b) {
     return;
+    /*
     var str = "";
     for (let i = 0; i < b.length; i++) {
       str = str + "{" + b[i].id + ", " + b[i].selected + "}";
@@ -217,10 +225,12 @@ class QuestContainer extends Component {
       }
     }
     return str === "" ? "Error" : str;
+    */
   }
 
   temp2func() {
     return;
+    /*
     var z = this.state.selections;
     var str = z.map(function(x) {
       return <div>{this.tempfunc(x)}</div>;
@@ -229,9 +239,11 @@ class QuestContainer extends Component {
       str = "empty";
     }
     return <div>{str}</div>;
+    */
   }
   renderResult() {
     var selectionsArr = [];
+    //console.log(this.state.selections);
     this.state.selections.forEach(function(state) {
       var stateSel = [];
       state.forEach(function(obj) {
@@ -241,15 +253,77 @@ class QuestContainer extends Component {
       });
       selectionsArr.push(stateSel);
     });
+    //console.log(selectionsArr);
+    this.saveQuizResults(selectionsArr);
     return (
       <Results
         quizStates={this.state.selections}
-        quizQuestions={quizQuestions}
+        quizQuestions={this.state.quizQuestions}
         quizSelections={selectionsArr}
       />
     );
   }
+  getScore(selectionsArr) {
+    var correct = true;
+    var num_correct = 0;
+    var total_q = 0;
+    //iterate through each question
+    for (let i = 0; i < this.state.quizQuestions.length; i++) {
+      correct = true;
+      //if number of answers (ex: checkboxes) is diff, then it's wrong
+      if (
+        this.state.quizQuestions[i].answer.length !== selectionsArr[i].length
+      ) {
+        correct = false;
+      } else {
+        //for each selection, if it's NOT in the answer, then the question is wrong.
+        selectionsArr[i].forEach(function(selection) {
+          if (!this.state.quizQuestions[i].answer.includes(selection)) {
+            correct = false;
+          }
+        }, this);
+      }
+      //if the flag was never set to false, then they got the question right
+      if (correct) {
+        num_correct += 1;
+      }
+      total_q += 1;
+    }
+    return num_correct / total_q;
+  }
 
+  saveQuizResults(selectionsArr) {
+    //get what they scored on quiz
+    const new_score = this.getScore(selectionsArr);
+    const store = new Store();
+    var moduleprog = store.get("moduleprog");
+    //if new score is better than current score, record score and what they answered.
+    if (moduleprog[this.state.quizNum - 1].score < new_score) {
+      moduleprog[this.state.quizNum - 1].score = new_score;
+      store.set("moduleprog", moduleprog);
+      //store state
+      var quizStates;
+      var quizSelect;
+      if (store.get("quizStates") === undefined) {
+        //first quiz
+        quizStates = [];
+      } else {
+        //adding quiz
+        quizStates = store.get("quizStates");
+      }
+      if (store.get("quizSelect") === undefined) {
+        //first quiz
+        quizSelect = [];
+      } else {
+        //adding quiz
+        quizSelect = store.get("quizSelect");
+      }
+      quizStates.push(this.state.selections);
+      quizSelect.push(selectionsArr);
+      store.set("quizStates", quizStates);
+      store.set("quizSelect", quizSelect);
+    }
+  }
   render() {
     return (
       <QuestStyle>

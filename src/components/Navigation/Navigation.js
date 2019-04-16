@@ -20,7 +20,7 @@ class Navigation extends Component {
           </Link>
           <Link
             className="bp3-button bp3-minimal bp3-icon-full-stacked-chart"
-            to="/"
+            to="/modulecontainer"
           >
             Modules
           </Link>
@@ -34,9 +34,9 @@ class Navigation extends Component {
           <Link
             className="bp3-button bp3-minimal bp3-icon-application"
             icon="application"
-            to="/questcontainer"
+            to="/clearstore"
           >
-            Sample Quiz
+            Clear Store
           </Link>
         </NavbarGroup>
       </Navbar>

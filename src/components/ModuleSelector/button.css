@@ -1,0 +1,6 @@
+.no-click {
+  pointer-events: none;
+}
+.bp3-button-text {
+  pointer-events: none;
+}
