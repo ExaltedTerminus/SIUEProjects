@@ -4,7 +4,21 @@ import quizQuestions from "../../api/quizQuestions";
 import ModuleList from "./ModuleList.js";
 import Results from "../Quiz/Results";
 import QuestContainer from "../Quiz/QuestContainer";
+import getQuiz from "../../api/quizQuestions";
+import { Card } from "@blueprintjs/core";
+import styled from "styled-components";
 const Store = window.require("electron-store");
+
+const QuestStyle = styled.div`
+  @media (min-width: 1000px) {
+    width: 70%;
+  }
+  @media (min-width: 1500px) {
+    width: 50%;
+  }
+  margin: auto;
+  padding-top: 2%;
+`;
 
 class ModuleSelector extends Component {
   constructor(props) {
@@ -20,6 +34,8 @@ class ModuleSelector extends Component {
   }
   handleCompletedModule(event) {
     var quizNum = event.target.id;
+    console.log(event.target);
+    console.log(event.target.id);
     this.setState({
       comp_state: 2,
       quizNum: quizNum
@@ -97,14 +113,24 @@ class ModuleSelector extends Component {
   }
   renderResults() {
     const store = new Store();
-    let quizState = store.get("quizStates")[this.state.quizNum];
-    let quizSelect = store.get("quizSelect")[this.state.quizNum];
+    let quizState = store.get("quizStates")[this.state.quizNum - 1];
+    console.log(this.state.quizNum);
+    let quizSelect = store.get("quizSelect")[this.state.quizNum - 1];
+    console.log("module");
+    console.log(quizSelect);
+    let modInfo = store.get("moduleprog")[this.state.quizNum - 1];
+
     return (
-      <Results
-        quizStates={quizState}
-        quizQuestions={quizQuestions}
-        quizSelections={quizSelect}
-      />
+      <QuestStyle>
+        <Card>
+          <Results
+            quizStates={quizState}
+            quizQuestions={getQuiz(this.state.quizNum - 1)}
+            quizSelections={quizSelect}
+            modInfo={modInfo}
+          />
+        </Card>
+      </QuestStyle>
     );
   }
   render() {

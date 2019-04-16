@@ -242,6 +242,7 @@ class QuestContainer extends Component {
     */
   }
   renderResult() {
+    const store = new Store();
     var selectionsArr = [];
     //console.log(this.state.selections);
     this.state.selections.forEach(function(state) {
@@ -253,13 +254,16 @@ class QuestContainer extends Component {
       });
       selectionsArr.push(stateSel);
     });
-    //console.log(selectionsArr);
+    console.log("quiz");
+    console.log(selectionsArr);
     this.saveQuizResults(selectionsArr);
+    let modInfo = store.get("moduleprog")[this.state.quizNum - 1];
     return (
       <Results
         quizStates={this.state.selections}
         quizQuestions={this.state.quizQuestions}
         quizSelections={selectionsArr}
+        modInfo={modInfo}
       />
     );
   }
@@ -313,6 +317,7 @@ class QuestContainer extends Component {
       }
       if (store.get("quizSelect") === undefined) {
         //first quiz
+        console.log("nothing stored in quizselect");
         quizSelect = [];
       } else {
         //adding quiz
@@ -322,6 +327,7 @@ class QuestContainer extends Component {
       quizSelect.push(selectionsArr);
       store.set("quizStates", quizStates);
       store.set("quizSelect", quizSelect);
+      console.log(store.get("quizSelect"));
     }
   }
   render() {
