@@ -4,7 +4,10 @@
   margin-right: 0px;
   margin-left: auto;
 }
-
+#r_back_btn {
+  margin-right: 0px;
+  margin-left: auto;
+}
 #results td,
 #results th {
   border: 1px solid #ddd;
@@ -13,10 +16,6 @@
 
 #results tr:nth-child(even) {
   background-color: #f2f2f2;
-}
-
-#results tr:hover {
-  background-color: #ddd;
 }
 
 #results th {

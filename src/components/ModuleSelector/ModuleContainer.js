@@ -3,7 +3,7 @@ import quizModules from "../../api/quizModules";
 import quizQuestions from "../../api/quizQuestions";
 import ModuleList from "./ModuleList.js";
 import Results from "../Quiz/Results";
-import QuestContainer from "../Quiz/QuestContainer";
+import VideoPlayer from "../VideoPlayer/VideoPlayer";
 import getQuiz from "../../api/quizQuestions";
 import { Card } from "@blueprintjs/core";
 import styled from "styled-components";
@@ -31,11 +31,10 @@ class ModuleSelector extends Component {
     };
     this.handleCompletedModule = this.handleCompletedModule.bind(this);
     this.handleCurrentModule = this.handleCurrentModule.bind(this);
+    this.handleReturn = this.handleReturn.bind(this);
   }
   handleCompletedModule(event) {
     var quizNum = event.target.id;
-    console.log(event.target);
-    console.log(event.target.id);
     this.setState({
       comp_state: 2,
       quizNum: quizNum
@@ -46,6 +45,11 @@ class ModuleSelector extends Component {
     this.setState({
       comp_state: 1,
       quizNum: quizNum
+    });
+  }
+  handleReturn() {
+    this.setState({
+      comp_state: 0
     });
   }
 
@@ -109,15 +113,23 @@ class ModuleSelector extends Component {
     );
   }
   renderQuiz() {
-    return <QuestContainer quizNum={this.state.quizNum} />;
+    console.log(quizModules[this.state.quizNum - 1].title_name);
+    return (
+      <VideoPlayer
+        quizNum={this.state.quizNum}
+        handleReturn={this.handleReturn}
+        title_name={quizModules[this.state.quizNum - 1].title_name}
+        sub_name={quizModules[this.state.quizNum - 1].sub_name}
+      />
+    );
+    /*
+    
+    */
   }
   renderResults() {
     const store = new Store();
     let quizState = store.get("quizStates")[this.state.quizNum - 1];
-    console.log(this.state.quizNum);
     let quizSelect = store.get("quizSelect")[this.state.quizNum - 1];
-    console.log("module");
-    console.log(quizSelect);
     let modInfo = store.get("moduleprog")[this.state.quizNum - 1];
 
     return (
@@ -128,6 +140,7 @@ class ModuleSelector extends Component {
             quizQuestions={getQuiz(this.state.quizNum - 1)}
             quizSelections={quizSelect}
             modInfo={modInfo}
+            handleReturn={this.handleReturn}
           />
         </Card>
       </QuestStyle>

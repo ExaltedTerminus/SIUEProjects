@@ -5,6 +5,7 @@ import Home from "../Home/Home";
 import Navigation from "../Navigation/Navigation";
 import ClearStore from "../ModuleSelector/ClearStore";
 import ModuleSelector from "../ModuleSelector/ModuleContainer";
+import VideoPlayer from "../VideoPlayer/VideoPlayer";
 
 class Routes extends Component {
   render() {
@@ -20,6 +21,7 @@ class Routes extends Component {
               <Route exact path="/" component={Home} />
               <Route path="/modulecontainer" component={ModuleSelector} />
               <Route path="/clearstore" component={ClearStore} />
+              <Route path="/videoplayer" component={VideoPlayer} />
             </div>
           </DivStyle>
         </Router>

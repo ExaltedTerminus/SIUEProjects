@@ -254,8 +254,6 @@ class QuestContainer extends Component {
       });
       selectionsArr.push(stateSel);
     });
-    console.log("quiz");
-    console.log(selectionsArr);
     this.saveQuizResults(selectionsArr);
     let modInfo = store.get("moduleprog")[this.state.quizNum - 1];
     return (
@@ -264,13 +262,16 @@ class QuestContainer extends Component {
         quizQuestions={this.state.quizQuestions}
         quizSelections={selectionsArr}
         modInfo={modInfo}
+        handleReturn={this.props.handleReturn}
       />
     );
   }
   getScore(selectionsArr) {
+    const store = new Store();
     var correct = true;
     var num_correct = 0;
     var total_q = 0;
+    var selected_correct = [];
     //iterate through each question
     for (let i = 0; i < this.state.quizQuestions.length; i++) {
       correct = true;
@@ -290,9 +291,25 @@ class QuestContainer extends Component {
       //if the flag was never set to false, then they got the question right
       if (correct) {
         num_correct += 1;
+        selected_correct.push(true);
+      } else {
+        selected_correct.push(false);
       }
       total_q += 1;
     }
+    console.log(selected_correct);
+    var modulecorrect;
+    if (store.get("modulecorrect") === undefined) {
+      console.log("undefined");
+      modulecorrect = [];
+    } else {
+      console.log("got it");
+      modulecorrect = store.get("modulecorrect");
+    }
+    console.log(modulecorrect);
+    modulecorrect.push(selected_correct);
+    console.log(modulecorrect);
+    store.set("modulecorrect", modulecorrect);
     return num_correct / total_q;
   }
 
@@ -301,6 +318,7 @@ class QuestContainer extends Component {
     const new_score = this.getScore(selectionsArr);
     const store = new Store();
     var moduleprog = store.get("moduleprog");
+
     //if new score is better than current score, record score and what they answered.
     if (moduleprog[this.state.quizNum - 1].score < new_score) {
       moduleprog[this.state.quizNum - 1].score = new_score;
@@ -308,6 +326,7 @@ class QuestContainer extends Component {
       //store state
       var quizStates;
       var quizSelect;
+
       if (store.get("quizStates") === undefined) {
         //first quiz
         quizStates = [];
@@ -317,7 +336,6 @@ class QuestContainer extends Component {
       }
       if (store.get("quizSelect") === undefined) {
         //first quiz
-        console.log("nothing stored in quizselect");
         quizSelect = [];
       } else {
         //adding quiz
@@ -327,7 +345,6 @@ class QuestContainer extends Component {
       quizSelect.push(selectionsArr);
       store.set("quizStates", quizStates);
       store.set("quizSelect", quizSelect);
-      console.log(store.get("quizSelect"));
     }
   }
   render() {

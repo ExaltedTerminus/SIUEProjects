@@ -7,6 +7,7 @@ const ClearStore = props => {
   store.delete("moduleprog");
   store.delete("quizStates");
   store.delete("quizSelect");
+  store.delete("modulecorrect");
 
   return <h1>Store Cleared</h1>;
 };
