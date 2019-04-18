@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import quizModules from "../../api/quizModules";
-import quizQuestions from "../../api/quizQuestions";
 import ModuleList from "./ModuleList.js";
 import Results from "../Quiz/Results";
 import VideoPlayer from "../VideoPlayer/VideoPlayer";
@@ -33,6 +32,7 @@ class ModuleSelector extends Component {
     this.handleCurrentModule = this.handleCurrentModule.bind(this);
     this.handleReturn = this.handleReturn.bind(this);
   }
+  //show results
   handleCompletedModule(event) {
     var quizNum = event.target.id;
     this.setState({
@@ -40,6 +40,7 @@ class ModuleSelector extends Component {
       quizNum: quizNum
     });
   }
+  //take quiz
   handleCurrentModule(event) {
     var quizNum = event.target.id;
     this.setState({
@@ -51,11 +52,14 @@ class ModuleSelector extends Component {
     this.setState({
       comp_state: 0
     });
+    this.componentWillMount();
   }
+  handleReview() {}
 
   componentWillMount() {
     const store = new Store();
     if (store.get("moduleprog") === undefined) {
+      console.log("new");
       var quizModCopy = this.copyQuizMod();
       store.set("moduleprog", quizModCopy);
     } else {
@@ -68,8 +72,9 @@ class ModuleSelector extends Component {
   }
 
   module_fixup(quizModCopy) {
-    const store = new Store();
+    console.log("h");
     for (let i = 0; i < quizModCopy.length; i++) {
+      console.log("o");
       let mod = quizModCopy[i];
       if (mod.curr_mod && mod.score > 0.8) {
         mod.isPassed = true;
@@ -80,8 +85,11 @@ class ModuleSelector extends Component {
           next_mod.curr_mod = true;
           quizModCopy[i + 1] = next_mod;
         }
-        quizModCopy[i] = mod;
       }
+      if (mod.curr_mod && mod.score >= 0) {
+        mod.attempted = true;
+      }
+      quizModCopy[i] = mod;
     }
     return quizModCopy;
   }
@@ -100,7 +108,8 @@ class ModuleSelector extends Component {
       score: module.score,
       prereq_done: module.prereq_done,
       curr_mod: module.curr_mod,
-      isPassed: module.isPassed
+      isPassed: module.isPassed,
+      attempted: module.attempted
     };
   }
   renderMod() {
@@ -114,10 +123,13 @@ class ModuleSelector extends Component {
   }
   renderQuiz() {
     console.log(quizModules[this.state.quizNum - 1].title_name);
+    console.log(this.state.modules);
     return (
       <VideoPlayer
+        modules={this.state.modules[this.state.quizNum - 1]}
         quizNum={this.state.quizNum}
         handleReturn={this.handleReturn}
+        handleReview={this.handleReview}
         title_name={quizModules[this.state.quizNum - 1].title_name}
         sub_name={quizModules[this.state.quizNum - 1].sub_name}
       />
@@ -141,6 +153,7 @@ class ModuleSelector extends Component {
             quizSelections={quizSelect}
             modInfo={modInfo}
             handleReturn={this.handleReturn}
+            handleReview={this.handleReview}
           />
         </Card>
       </QuestStyle>
@@ -148,10 +161,13 @@ class ModuleSelector extends Component {
   }
   render() {
     if (this.state.comp_state == 1) {
+      //take quiz
       return this.renderQuiz();
     } else if (this.state.comp_state == 2) {
+      //show quiz results
       return this.renderResults();
     } else {
+      //show modulelist
       return this.renderMod();
     }
   }

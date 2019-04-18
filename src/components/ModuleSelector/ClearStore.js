@@ -1,14 +1,41 @@
 import React from "react";
+import { Button, Card } from "@blueprintjs/core";
+import styled from "styled-components";
 const Store = window.require("electron-store");
 
-const ClearStore = props => {
-  const store = new Store();
-  store.delete("currmod");
-  store.delete("moduleprog");
-  store.delete("quizStates");
-  store.delete("quizSelect");
-  store.delete("modulecorrect");
+const QuestStyle = styled.div`
+  @media (min-width: 1000px) {
+    width: 70%;
+  }
+  @media (min-width: 1500px) {
+    width: 50%;
+  }
+  margin: auto;
+  padding-top: 2%;
+`;
 
-  return <h1>Store Cleared</h1>;
+const ClearStore = props => {
+  function clear() {
+    const store = new Store();
+    store.delete("currmod");
+    store.delete("moduleprog");
+    store.delete("quizStates");
+    store.delete("quizSelect");
+    store.delete("modulecorrect");
+    window.alert("Store cleared");
+  }
+  return (
+    <QuestStyle>
+      <Card>
+        <Button
+          intent="danger"
+          text={"Clear Store"}
+          onClick={() => clear()}
+          disabled={false}
+          fill={false}
+        />
+      </Card>
+    </QuestStyle>
+  );
 };
 export default ClearStore;

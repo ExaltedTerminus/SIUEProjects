@@ -1,11 +1,6 @@
 import React from "react";
 import YouTube from "react-youtube";
-import {
-  Card,
-  Button,
-  Callout,
-  HandleInteractionKind
-} from "@blueprintjs/core";
+import { Card, Button } from "@blueprintjs/core";
 import styled from "styled-components";
 import QuestContainer from "../Quiz/QuestContainer";
 const QuestStyle = styled.div`
@@ -61,7 +56,7 @@ class Example extends React.Component {
 
     this.state = {
       end: false,
-      pass_through: false
+      comp_state: 0
     };
     this.handleEnd = this.handleEnd.bind(this);
     this.handleDone = this.handleDone.bind(this);
@@ -73,20 +68,22 @@ class Example extends React.Component {
   }
   handleDone() {
     this.setState({
-      pass_through: true
+      comp_state: 1
     });
   }
   renderWarning() {
-    return (
-      <div class="bp3-callout .modifier">
-        <h4 class="bp3-heading">Watch Video to Proceed</h4>
-        Before continuing onto the quiz, you must watch the video in it's
-        entirety.
-      </div>
-    );
+    if (!this.props.modules.attempted) {
+      return (
+        <div class="bp3-callout .modifier">
+          <h4 class="bp3-heading">Watch Video to Proceed</h4>
+          Before continuing onto the quiz, you must watch the video in it's
+          entirety.
+        </div>
+      );
+    }
   }
-  render() {
-    const opts = {
+  renderForce() {
+    var opts = {
       height: "390",
       width: "640",
       playerVars: {
@@ -100,56 +97,99 @@ class Example extends React.Component {
         rel: 0
       }
     };
-    console.log(this.props.title_name);
     var module_num = this.props.title_name.replace("Module ", "") - 1;
-    if (!this.state.pass_through) {
-      return (
-        <QuestStyle>
-          <Card>
-            <TitleStyle>
-              <h1>
-                {this.props.title_name}: {this.props.sub_name}
-              </h1>
-            </TitleStyle>
-            <PlayerStyle>
-              <YouTube
-                videoId={module_links[module_num]}
-                opts={opts}
-                onReady={this._onReady}
-                onEnd={this.handleEnd}
-              />
-            </PlayerStyle>
-
-            <ButtonStyle>
-              {this.renderWarning()}
-              <Button
-                icon="arrow-right"
-                intent="primary"
-                text="Next"
-                onClick={this.handleDone}
-                disabled={!this.state.end}
-                fill={false}
-                large={true}
-              />
-            </ButtonStyle>
-            <Button
-              intent="danger"
-              text="Debug Only Skip Video"
-              onClick={this.handleEnd}
-              disabled={false}
-              fill={false}
-              large={false}
+    return (
+      <QuestStyle>
+        <Card>
+          <TitleStyle>
+            <h1>
+              {this.props.title_name}: {this.props.sub_name}
+            </h1>
+          </TitleStyle>
+          <PlayerStyle>
+            <YouTube
+              videoId={module_links[module_num]}
+              opts={opts}
+              onReady={this._onReady}
+              onEnd={this.handleEnd}
             />
-          </Card>
-        </QuestStyle>
-      );
+          </PlayerStyle>
+
+          <ButtonStyle>
+            {this.renderWarning()}
+            <Button
+              icon="arrow-right"
+              intent="primary"
+              text="Next"
+              onClick={this.handleDone}
+              disabled={!(this.state.end || this.props.modules.attempted)}
+              fill={false}
+              large={true}
+            />
+          </ButtonStyle>
+          <Button
+            intent="danger"
+            text="Debug Only Skip Video"
+            onClick={this.handleEnd}
+            disabled={false}
+            fill={false}
+            large={false}
+          />
+        </Card>
+      </QuestStyle>
+    );
+  }
+  renderPass() {
+    return (
+      <QuestContainer
+        quizNum={this.props.quizNum}
+        handleReturn={this.props.handleReturn}
+      />
+    );
+  }
+  renderReview() {
+    var module_num = this.props.title_name.replace("Module ", "") - 1;
+    var opts = {
+      height: "390",
+      width: "640",
+      playerVars: {
+        // https://developers.google.com/youtube/player_parameters
+        autoplay: 1
+      }
+    };
+    return (
+      <QuestStyle>
+        <Card>
+          <Button
+            icon="arrow-left"
+            intent="primary"
+            text="Back"
+            onClick={this.props.handleReturnReview}
+            disabled={false}
+            fill={false}
+            large={false}
+          />
+          <TitleStyle>
+            <h1>
+              {this.props.title_name}: {this.props.sub_name}
+            </h1>
+          </TitleStyle>
+          <PlayerStyle>
+            <YouTube
+              videoId={module_links[module_num]}
+              opts={opts}
+              onReady={this._onReady}
+            />
+          </PlayerStyle>
+        </Card>
+      </QuestStyle>
+    );
+  }
+  render() {
+    if (this.state.comp_state === 0) {
+      return this.renderForce();
     } else {
-      return (
-        <QuestContainer
-          quizNum={this.props.quizNum}
-          handleReturn={this.props.handleReturn}
-        />
-      );
+      return this.renderPass();
     }
   }
 

@@ -13,10 +13,14 @@ class Navigation extends Component {
     return (
       <Navbar>
         <NavbarGroup align={Alignment.LEFT}>
-          <NavbarHeading>Acchal</NavbarHeading>
+          <NavbarHeading>Accounting Challenge</NavbarHeading>
           <NavbarDivider />
-          <Link className="bp3-button bp3-minimal bp3-icon-home" to="/">
-            Home
+          <Link
+            className="bp3-button bp3-minimal bp3-icon-home"
+            to="/"
+            icon="info-sign"
+          >
+            Info
           </Link>
           <Link
             className="bp3-button bp3-minimal bp3-icon-full-stacked-chart"
@@ -29,7 +33,7 @@ class Navigation extends Component {
             icon="application"
             to="/clearstore"
           >
-            Clear Store
+            Debug
           </Link>
         </NavbarGroup>
       </Navbar>

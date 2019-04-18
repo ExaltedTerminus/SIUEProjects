@@ -99,7 +99,6 @@ function createWindow() {
 
   const menu = Menu.buildFromTemplate(menuTemplate);
   //mainWindow.setMenu(menu);
-  mainWindow.webContents.openDevTools;
 
   mainWindow.on("closed", function() {
     mainWindow = null;

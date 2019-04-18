@@ -3,12 +3,19 @@ import ChoiceResults from "./ChoiceResults";
 import Correctness from "./Correctness";
 import QuestionCount from "./QuestionCount";
 import { Card, Icon, Button } from "@blueprintjs/core";
+import Explanation from "./Explanation";
 import "./results.css";
-
+import styled from "styled-components";
+import VideoComponent from "../VideoPlayer/VideoComponent";
 const Store = window.require("electron-store");
-
+const TopStyle = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+`;
 const Results = props => {
   function renderQuestion(i) {
+    console.log(props.quizQuestions[i]);
     return (
       <React-Fragment>
         <Card>
@@ -28,6 +35,7 @@ const Results = props => {
             qSelections={props.quizSelections[i]}
             answers={props.quizQuestions[i].answer}
           />
+          <Explanation exp={props.quizQuestions[i].explain} />
         </Card>
       </React-Fragment>
     );
@@ -99,28 +107,39 @@ const Results = props => {
       </table>
     );
   }
+  function renderVideo() {
+    return (
+      <VideoComponent
+        quizNum={props.modInfo.title_name.replace("Module ", "") - 1}
+      />
+    );
+  }
   function renderBackButton() {
     return (
-      <Button
-        icon="arrow-left"
-        intent="primary"
-        text="Back"
-        onClick={props.handleReturn}
-        disabled={false}
-        fill={false}
-      />
+      <TopStyle>
+        <Button
+          icon="arrow-left"
+          intent="primary"
+          text="Back"
+          onClick={props.handleReturn}
+          disabled={false}
+          fill={false}
+        />
+      </TopStyle>
     );
   }
   return (
     <div>
-      {renderBackButton()}
+      <div>{renderBackButton()}</div>
+      {renderVideo()}
+
       <div className="resultside">
         <h1>
           {props.modInfo.title_name}: {props.modInfo.sub_name}
         </h1>
         {renderSummary()}
       </div>
-      {renderAll()}
+      <div>{renderAll()}</div>
     </div>
   );
 };

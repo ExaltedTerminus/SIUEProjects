@@ -2,6 +2,7 @@ import React from "react";
 import QuestionCount from "../Quiz/QuestionCount";
 import QuestionTitle from "../Quiz/QuestionTitle";
 import RadioChkChoices from "./RadioChkChoices";
+import ShortAnswer from "./ShortAnswer";
 
 const Quiz = props => {
   function renderOptions() {
@@ -32,7 +33,7 @@ const Quiz = props => {
     return <div>TO DO</div>;
   }
   function renderShort() {
-    return <div>TO DO</div>;
+    return <ShortAnswer />;
   }
   return (
     <div key={props.questionId}>

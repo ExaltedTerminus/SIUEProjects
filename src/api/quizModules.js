@@ -5,7 +5,8 @@ var quizModules = [
     score: -1.0,
     prereq_done: true,
     curr_mod: true,
-    isPassed: false
+    isPassed: false,
+    attempted: false
   },
   {
     title_name: "Module 2",
@@ -13,7 +14,8 @@ var quizModules = [
     score: -1.0,
     prereq_done: false,
     curr_mod: false,
-    isPassed: false
+    isPassed: false,
+    attempted: false
   },
   {
     title_name: "Module 3",
@@ -21,7 +23,8 @@ var quizModules = [
     score: -1.0,
     prereq_done: true,
     curr_mod: false,
-    is_passed: false
+    is_passed: false,
+    attempted: false
   },
   {
     title_name: "Module 4",
@@ -29,7 +32,8 @@ var quizModules = [
     score: -1.0,
     prereq_done: true,
     curr_mod: false,
-    is_passed: false
+    is_passed: false,
+    attempted: false
   },
   {
     title_name: "Module 5",
@@ -37,7 +41,8 @@ var quizModules = [
     score: -1.0,
     prereq_done: false,
     curr_mod: false,
-    is_passed: false
+    is_passed: false,
+    attempted: false
   },
   {
     title_name: "Module 6",
@@ -45,7 +50,8 @@ var quizModules = [
     score: -1.0,
     prereq_done: false,
     curr_mod: false,
-    is_passed: false
+    is_passed: false,
+    attempted: false
   },
   {
     title_name: "Module 7",
@@ -53,7 +59,8 @@ var quizModules = [
     score: -1.0,
     prereq_done: false,
     curr_mod: false,
-    is_passed: false
+    is_passed: false,
+    attempted: false
   },
   {
     title_name: "Module 8",
@@ -61,7 +68,8 @@ var quizModules = [
     score: -1.0,
     prereq_done: false,
     curr_mod: false,
-    is_passed: false
+    is_passed: false,
+    attempted: false
   },
   {
     title_name: "Module 9",
@@ -69,7 +77,8 @@ var quizModules = [
     score: -1.0,
     prereq_done: false,
     curr_mod: false,
-    is_passed: false
+    is_passed: false,
+    attempted: false
   },
   {
     title_name: "Module 10",
@@ -77,7 +86,8 @@ var quizModules = [
     score: -1.0,
     prereq_done: false,
     curr_mod: false,
-    is_passed: false
+    is_passed: false,
+    attempted: false
   }
 ];
 

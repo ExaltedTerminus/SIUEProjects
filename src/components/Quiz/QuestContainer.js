@@ -42,8 +42,6 @@ class QuestContainer extends Component {
   }
 
   componentWillMount() {
-    const store = new Store();
-
     var quizQuestions = getQuiz(this.props.quizNum - 1);
     const optionsObjArr = quizQuestions[0].options;
 
@@ -160,31 +158,6 @@ class QuestContainer extends Component {
       selections: selections
     });
   }
-
-  renderQuiz() {
-    return (
-      <React-Fragment>
-        <Quiz
-          answerOptions={this.state.questionOptions}
-          currentNumQ={this.state.questionId}
-          totalNumQ={this.state.quizQuestions.length}
-          qTitle={this.state.questionTitle}
-          qID={this.state.questionId}
-          qType={this.state.questionType}
-          genericHandler={this.handleGenericSelected}
-          qState={this.state.questionState}
-        />
-        <hr />
-        <QuizNav
-          onNextClick={this.handleNextButton}
-          onPreviousClick={this.handlePreviousButton}
-          buttonMode={this.state.buttonDisabled}
-          counter={this.state.counter}
-          questionTotal={this.state.quizQuestions.length}
-        />
-      </React-Fragment>
-    );
-  }
   deepCopySelections(selections) {
     var newObj = [];
     for (let i = 0; i < selections.length; i++) {
@@ -212,59 +185,6 @@ class QuestContainer extends Component {
   }
   copyVal(obj) {
     return { id: obj.id, selected: obj.selected };
-  }
-
-  tempfunc(b) {
-    return;
-    /*
-    var str = "";
-    for (let i = 0; i < b.length; i++) {
-      str = str + "{" + b[i].id + ", " + b[i].selected + "}";
-      if (i !== b.length - 1) {
-        str += ", ";
-      }
-    }
-    return str === "" ? "Error" : str;
-    */
-  }
-
-  temp2func() {
-    return;
-    /*
-    var z = this.state.selections;
-    var str = z.map(function(x) {
-      return <div>{this.tempfunc(x)}</div>;
-    }, this);
-    if (z.length === 0) {
-      str = "empty";
-    }
-    return <div>{str}</div>;
-    */
-  }
-  renderResult() {
-    const store = new Store();
-    var selectionsArr = [];
-    //console.log(this.state.selections);
-    this.state.selections.forEach(function(state) {
-      var stateSel = [];
-      state.forEach(function(obj) {
-        if (obj.selected) {
-          stateSel.push(obj.id);
-        }
-      });
-      selectionsArr.push(stateSel);
-    });
-    this.saveQuizResults(selectionsArr);
-    let modInfo = store.get("moduleprog")[this.state.quizNum - 1];
-    return (
-      <Results
-        quizStates={this.state.selections}
-        quizQuestions={this.state.quizQuestions}
-        quizSelections={selectionsArr}
-        modInfo={modInfo}
-        handleReturn={this.props.handleReturn}
-      />
-    );
   }
   getScore(selectionsArr) {
     const store = new Store();
@@ -347,14 +267,60 @@ class QuestContainer extends Component {
       store.set("quizSelect", quizSelect);
     }
   }
+  renderResult() {
+    const store = new Store();
+    var selectionsArr = [];
+    //console.log(this.state.selections);
+    this.state.selections.forEach(function(state) {
+      var stateSel = [];
+      state.forEach(function(obj) {
+        if (obj.selected) {
+          stateSel.push(obj.id);
+        }
+      });
+      selectionsArr.push(stateSel);
+    });
+    this.saveQuizResults(selectionsArr);
+    let modInfo = store.get("moduleprog")[this.state.quizNum - 1];
+    return (
+      <Results
+        quizStates={this.state.selections}
+        quizQuestions={this.state.quizQuestions}
+        quizSelections={selectionsArr}
+        modInfo={modInfo}
+        handleReturn={this.props.handleReturn}
+      />
+    );
+  }
+  renderQuiz() {
+    return (
+      <React-Fragment>
+        <Quiz
+          answerOptions={this.state.questionOptions}
+          currentNumQ={this.state.questionId}
+          totalNumQ={this.state.quizQuestions.length}
+          qTitle={this.state.questionTitle}
+          qID={this.state.questionId}
+          qType={this.state.questionType}
+          genericHandler={this.handleGenericSelected}
+          qState={this.state.questionState}
+        />
+        <hr />
+        <QuizNav
+          onNextClick={this.handleNextButton}
+          onPreviousClick={this.handlePreviousButton}
+          buttonMode={this.state.buttonDisabled}
+          counter={this.state.counter}
+          questionTotal={this.state.quizQuestions.length}
+        />
+      </React-Fragment>
+    );
+  }
   render() {
     return (
       <QuestStyle>
         <Card>
           {this.state.complete ? this.renderResult() : this.renderQuiz()}
-          {this.tempfunc(this.state.questionState)}
-
-          {this.temp2func()}
         </Card>
       </QuestStyle>
     );
