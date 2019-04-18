@@ -154,7 +154,12 @@ class Example extends React.Component {
       width: "640",
       playerVars: {
         // https://developers.google.com/youtube/player_parameters
-        autoplay: 1
+        autoplay: 1,
+        modestbranding: 1,
+        cc_load_policy: 0,
+        fs: 0,
+        iv_load_policy: 3,
+        rel: 0
       }
     };
     return (

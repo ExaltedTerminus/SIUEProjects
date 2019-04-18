@@ -34,7 +34,12 @@ const VideoComponent = props => {
     height: "390",
     width: "640",
     playerVars: {
-      autoplay: 0
+      autoplay: 0,
+      modestbranding: 1,
+      cc_load_policy: 0,
+      fs: 0,
+      iv_load_policy: 3,
+      rel: 0
     }
   };
   return (
