@@ -219,53 +219,71 @@ class QuestContainer extends Component {
       total_q += 1;
     }
     console.log(selected_correct);
-    var modulecorrect;
-    if (store.get("modulecorrect") === undefined) {
-      console.log("undefined");
-      modulecorrect = [];
-    } else {
-      console.log("got it");
-      modulecorrect = store.get("modulecorrect");
-    }
-    console.log(modulecorrect);
-    modulecorrect.push(selected_correct);
-    console.log(modulecorrect);
-    store.set("modulecorrect", modulecorrect);
-    return num_correct / total_q;
+    var obj = {
+      score: num_correct / total_q,
+      modulecorrect: selected_correct
+    };
+    return obj;
   }
 
   saveQuizResults(selectionsArr) {
     //get what they scored on quiz
-    const new_score = this.getScore(selectionsArr);
+    const obj = this.getScore(selectionsArr);
+    const new_score = obj.score;
+    const modulecorrect = obj.modulecorrect;
     const store = new Store();
     var moduleprog = store.get("moduleprog");
 
     //if new score is better than current score, record score and what they answered.
     if (moduleprog[this.state.quizNum - 1].score < new_score) {
+      console.log("new score better");
+      console.log(moduleprog[this.state.quizNum - 1]);
       moduleprog[this.state.quizNum - 1].score = new_score;
       store.set("moduleprog", moduleprog);
-      //store state
       var quizStates;
       var quizSelect;
-
-      if (store.get("quizStates") === undefined) {
-        //first quiz
-        quizStates = [];
-      } else {
-        //adding quiz
-        quizStates = store.get("quizStates");
-      }
-      if (store.get("quizSelect") === undefined) {
-        //first quiz
-        quizSelect = [];
-      } else {
-        //adding quiz
+      var quizCorrect;
+      if (moduleprog[this.state.quizNum - 1].attempted) {
+        //rewrite old score
+        quizStates = quizStates = store.get("quizStates");
         quizSelect = store.get("quizSelect");
+        quizCorrect = store.get("modulecorrect");
+        quizStates[this.state.quizNum - 1] = this.state.selections;
+        quizSelect[this.state.quizNum - 1] = selectionsArr;
+        quizCorrect[this.state.quizNum - 1] = modulecorrect;
+        store.set("quizStates", quizStates);
+        store.set("quizSelect", quizSelect);
+        store.set("modulecorrect", quizCorrect);
+      } else {
+        //push new score
+        if (store.get("quizStates") === undefined) {
+          //first quiz
+          quizStates = [];
+        } else {
+          //adding quiz
+          quizStates = store.get("quizStates");
+        }
+        if (store.get("quizSelect") === undefined) {
+          //first quiz
+          quizSelect = [];
+        } else {
+          //adding quiz
+          quizSelect = store.get("quizSelect");
+        }
+        if (store.get("modulecorrect") === undefined) {
+          //first quiz
+          quizCorrect = [];
+        } else {
+          //adding quiz
+          quizCorrect = store.get("modulecorrect");
+        }
+        quizStates.push(this.state.selections);
+        quizSelect.push(selectionsArr);
+        quizCorrect.push(modulecorrect);
+        store.set("quizStates", quizStates);
+        store.set("quizSelect", quizSelect);
+        store.set("modulecorrect", quizCorrect);
       }
-      quizStates.push(this.state.selections);
-      quizSelect.push(selectionsArr);
-      store.set("quizStates", quizStates);
-      store.set("quizSelect", quizSelect);
     }
   }
   renderResult() {

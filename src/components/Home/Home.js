@@ -18,8 +18,8 @@ class Home extends Component {
       <QuestStyle>
         <Card>
           <h1>Welcome to the Accounting Challenge!</h1>
-          <div class="bp3-callout .modifier">
-            <h2 class="bp3-heading">Instructions</h2>
+          <div className="bp3-callout .modifier">
+            <h2 className="bp3-heading">Instructions</h2>
             <h4>
               You must complete the modules in sequence. A score of 80% is
               required to move on to the next module.

@@ -18,7 +18,7 @@ const ModuleStyle = styled.div`
 const ModuleList = props => {
   function renderModule(key) {
     return (
-      <ModuleStyle>
+      <ModuleStyle key={key.title_name}>
         <Card>
           <Module
             title_name={key.title_name}

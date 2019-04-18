@@ -19,12 +19,17 @@ const PlayerStyle = styled.div`
 `;
 const ButtonStyle = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: row
   padding-top: 50px;
 `;
 const TitleStyle = styled.div`
   display: flex;
   justify-content: center;
+`;
+const NextButtonStyle = styled.div`
+  padding-top: 50px;
+  display: flex;
+  flex-direction: row-reverse;
 `;
 
 const Module1 = "oxQxshZETWo";
@@ -74,11 +79,36 @@ class Example extends React.Component {
   renderWarning() {
     if (!this.props.modules.attempted) {
       return (
-        <div class="bp3-callout .modifier">
-          <h4 class="bp3-heading">Watch Video to Proceed</h4>
-          Before continuing onto the quiz, you must watch the video in it's
-          entirety.
-        </div>
+        <ButtonStyle>
+          <div className="bp3-callout">
+            <h4 className="bp3-heading">Watch Video to Proceed</h4>
+            Before continuing onto the quiz, you must watch the video in it's
+            entirety.
+          </div>
+          <Button
+            icon="arrow-right"
+            intent="primary"
+            text="Next"
+            onClick={this.handleDone}
+            disabled={!(this.state.end || this.props.modules.attempted)}
+            fill={false}
+            large={true}
+          />
+        </ButtonStyle>
+      );
+    } else {
+      return (
+        <NextButtonStyle>
+          <Button
+            icon="arrow-right"
+            intent="primary"
+            text="Next"
+            onClick={this.handleDone}
+            disabled={!(this.state.end || this.props.modules.attempted)}
+            fill={false}
+            large={true}
+          />
+        </NextButtonStyle>
       );
     }
   }
@@ -115,27 +145,16 @@ class Example extends React.Component {
             />
           </PlayerStyle>
 
-          <ButtonStyle>
-            {this.renderWarning()}
-            <Button
-              icon="arrow-right"
-              intent="primary"
-              text="Next"
-              onClick={this.handleDone}
-              disabled={!(this.state.end || this.props.modules.attempted)}
-              fill={false}
-              large={true}
-            />
-          </ButtonStyle>
-          <Button
-            intent="danger"
-            text="Debug Only Skip Video"
-            onClick={this.handleEnd}
-            disabled={false}
-            fill={false}
-            large={false}
-          />
+          {this.renderWarning()}
         </Card>
+        <Button
+          intent="danger"
+          text="Debug Only Skip Video"
+          onClick={this.handleEnd}
+          disabled={false}
+          fill={false}
+          large={false}
+        />
       </QuestStyle>
     );
   }

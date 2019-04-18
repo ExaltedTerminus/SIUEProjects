@@ -58,25 +58,29 @@ class ModuleSelector extends Component {
 
   componentWillMount() {
     const store = new Store();
+    var quizModCopy;
     if (store.get("moduleprog") === undefined) {
-      var quizModCopy = this.copyQuizMod();
+      quizModCopy = this.copyQuizMod();
       store.set("moduleprog", quizModCopy);
     } else {
-      var quizModCopy = store.get("moduleprog");
+      quizModCopy = store.get("moduleprog");
     }
     quizModCopy = this.module_fixup(quizModCopy);
+    store.set("moduleprog", quizModCopy);
     this.setState({
       modules: quizModCopy
     });
   }
 
   module_fixup(quizModCopy) {
+    console.log(quizModCopy);
+    var mod;
     for (let i = 0; i < quizModCopy.length; i++) {
-      let mod = quizModCopy[i];
+      mod = quizModCopy[i];
       if (mod.curr_mod && mod.score > 0.8) {
         mod.isPassed = true;
         mod.curr_mod = false;
-        if (i + 1 != 10) {
+        if (i + 1 !== 10) {
           let next_mod = quizModCopy[i + 1];
           next_mod.prereq_done = true;
           next_mod.curr_mod = true;
@@ -84,10 +88,12 @@ class ModuleSelector extends Component {
         }
       }
       if (mod.curr_mod && mod.score >= 0) {
+        console.log("hello?");
         mod.attempted = true;
       }
       quizModCopy[i] = mod;
     }
+    console.log(quizModCopy);
     return quizModCopy;
   }
   copyQuizMod() {
@@ -157,10 +163,10 @@ class ModuleSelector extends Component {
     );
   }
   render() {
-    if (this.state.comp_state == 1) {
+    if (this.state.comp_state === 1) {
       //take quiz
       return this.renderQuiz();
-    } else if (this.state.comp_state == 2) {
+    } else if (this.state.comp_state === 2) {
       //show quiz results
       return this.renderResults();
     } else {

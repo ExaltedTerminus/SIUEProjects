@@ -20,7 +20,6 @@ const CheckStyle = styled.div`
 `;
 
 const ChoiceResults = props => {
-  var selectedValue;
   function getIcon(answer, selected) {
     if (answer) {
       return <Icon icon="tick" intent="success" />;
@@ -89,12 +88,6 @@ const ChoiceResults = props => {
   }
 
   function renderRadioGroup(key, answer, selected) {
-    for (let i = 0; i < props.qState.length; i++) {
-      const currentQ = props.qState[i];
-      if (currentQ.selected) {
-        selectedValue = currentQ.id;
-      }
-    }
     return (
       <RadioStyle>
         <CheckStyle>
