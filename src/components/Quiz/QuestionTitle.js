@@ -10,7 +10,11 @@ function QuestionTitle(props) {
     return <h2>{key}</h2>;
   }
   if (props.question.split("\n").length === 1) {
-    return <h1>{props.question}</h1>;
+    if (props.size === 1) {
+      return <h1>{props.question}</h1>;
+    } else {
+      return <h2>{props.question}</h2>;
+    }
   } else {
     let multi = props.question.split("\n");
     return <div>{multi.map(multi_title)}</div>;

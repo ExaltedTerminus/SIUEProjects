@@ -5,6 +5,7 @@ import Quiz from "../../components/Quiz/Quiz";
 import Results from "./Results";
 import QuizNav from "../Quiz/QuizNav";
 import { Card } from "@blueprintjs/core";
+import quizModules from "../../api/quizModules";
 const Store = window.require("electron-store");
 const QuestStyle = styled.div`
   @media (min-width: 1000px) {
@@ -304,6 +305,11 @@ class QuestContainer extends Component {
           qType={this.state.questionType}
           genericHandler={this.handleGenericSelected}
           qState={this.state.questionState}
+          modName={
+            quizModules[this.state.quizNum - 1].title_name +
+            ": " +
+            quizModules[this.state.quizNum - 1].sub_name
+          }
         />
         <hr />
         <QuizNav

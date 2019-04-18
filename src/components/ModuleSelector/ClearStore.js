@@ -17,6 +17,11 @@ const QuestStyle = styled.div`
 const ClearStore = props => {
   function clear() {
     const store = new Store();
+    console.log(store.get("currmod"));
+    console.log(store.get("moduleprog"));
+    console.log(store.get("quizStates"));
+    console.log(store.get("quizSelect"));
+    console.log(store.get("modulecorrect"));
     store.delete("currmod");
     store.delete("moduleprog");
     store.delete("quizStates");

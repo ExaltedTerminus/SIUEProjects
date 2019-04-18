@@ -1,23 +1,25 @@
 var quizQuestions = [
   //module 1
   [
+    //1:1
     {
       question:
-        "Dave Smith has just won the state lottery and has the following three payout options for after-tax prize money:\n1. $114,000 per year at the end of each of the next six years\n2. $238,000 (lump sum) now\n3. $502,000 (lump sum) six years from now\nThe annual discount rate is 9%. Compute the present value of the third option. \nWhat is the Present value of the lottery receipt under the third option?\n<IMG>",
+        "The fact that invested cash earns income over time is called the time value of money.",
       type: "radio",
       options: [
         {
-          content: "$287,642",
+          content: "TRUE",
           id: "j1"
         },
         {
-          content: "$299,192",
+          content: "FALSE",
           id: "j2"
         }
       ],
-      answer: ["j2"],
+      answer: ["j1"],
       explain: ""
     },
+    //1:2
     {
       question: "Which of the following describes the time value of money?",
       type: "radio",
@@ -36,6 +38,7 @@ var quizQuestions = [
       answer: ["q2"],
       explain: ""
     },
+    //1:3
     {
       question:
         "The only difference between the present value and future value of a lump sum is the amount of interest that is earned in the intervening time span.",
@@ -53,6 +56,7 @@ var quizQuestions = [
       answer: ["a1"],
       explain: ""
     },
+    //1:4
     {
       question: "Which of the following most accurately describes an annuity?",
       type: "radio",
@@ -71,6 +75,7 @@ var quizQuestions = [
       answer: ["b2"],
       explain: ""
     },
+    //1:5
     {
       question:
         "An annuity is a series of unequal payments over equal intervals.",
@@ -88,6 +93,7 @@ var quizQuestions = [
       answer: ["c2"],
       explain: ""
     },
+    //1:6
     {
       question:
         "The process for calculating present values is often called discounting future cash flows",
@@ -105,6 +111,7 @@ var quizQuestions = [
       answer: ["z1"],
       explain: ""
     },
+    //1:7
     {
       question:
         "An annuity is a series of unequal payments over equal intervals.",
@@ -125,6 +132,7 @@ var quizQuestions = [
   ],
   //module 2
   [
+    //2:1
     {
       question:
         "All else being equal, the shorter the investment period, the higher the total amount of interest earned.",
@@ -142,6 +150,7 @@ var quizQuestions = [
       answer: ["j2"],
       explain: ""
     },
+    //2:2
     {
       question:
         "Compound interest means that interest is calculated only on the principal amount.",
@@ -159,6 +168,7 @@ var quizQuestions = [
       answer: ["z2"],
       explain: ""
     },
+    //2:3
     {
       question:
         "Compound interest assumes that all interest earned will remain invested and earn additional interest at the same interest rate.",
@@ -176,6 +186,7 @@ var quizQuestions = [
       answer: ["x1"],
       explain: ""
     },
+    //2:4
     {
       question:
         "An investment today of $8,424 at 6% will yield total payments of $10,000 over five years.  The reason for this increase is that the interest is being earned on principal that is left invested each year.",
@@ -191,12 +202,14 @@ var quizQuestions = [
         }
       ],
       answer: ["y1"],
-      explain: "stuff"
+      explain:
+        "PV = Payment × PVA factor (i = 6%, n = 5)\n = $2,000 × 4.212\n = $8,424"
     }
   ],
   //module 3
   [
     {
+      //3:1
       question:
         "When computing the present value, the interest rate will vary depending on the amount of risk. Riskier investments, such as stock investments, command higher interest rates.",
       type: "radio",
@@ -211,8 +224,9 @@ var quizQuestions = [
         }
       ],
       answer: ["a1"],
-      explain: "FV = $100,000 × 1.42576* = $142,576\n*FV of $1: n = 12; i = 3%"
+      explain: ""
     },
+    //3:2
     {
       question:
         "When computing the present value, the interest rate will vary depending on the amount of risk. Safer investments, such as FDIC-insured bank deposits, yield lower interest rates.",
@@ -233,6 +247,7 @@ var quizQuestions = [
   ],
   //module 4
   [
+    //4:1
     {
       question:
         "Today, Thomas deposited $100,000 in a three-year, 12% CD that compounds quarterly. What is the maturity value of the CD?",
@@ -256,8 +271,10 @@ var quizQuestions = [
         }
       ],
       answer: ["a3"],
-      explain: ""
+      explain:
+        "Explanation:  FV = $100,000 × 1.42576* = $142,576\n*FV of $1: n = 12; i = 3%"
     },
+    //4:2
     {
       question:
         "At the end of each quarter, Patti deposits $500 into an account that pays 12% interest compounded quarterly. How much will Patti have in the account in three years?",
@@ -281,7 +298,7 @@ var quizQuestions = [
         }
       ],
       answer: ["b1"],
-      explain: ""
+      explain: "FVA = $500 × 14.1920* = $7,096\n*FVA of $1: n = 12; i = 3%"
     }
   ],
   //module 5
@@ -360,6 +377,7 @@ var quizQuestions = [
     {
       question:
         "Angelina wants to invest money in a 6% CD account that compounds semiannually. Angelina would like the account to have a balance of $50,000 four years from now. How much must Angelina deposit to accomplish her goal?",
+      type: "radio",
       options: [
         {
           content: "$38,251",
@@ -385,6 +403,7 @@ var quizQuestions = [
     {
       question:
         "Bill wants to give Hillary a $500,000 gift in seven years. If money is worth 6% compounded semiannually, what is Hillary's gift worth today?",
+      type: "radio",
       options: [
         {
           content: "$330,560",
@@ -410,6 +429,7 @@ var quizQuestions = [
     {
       question:
         "Monica wants to sell her share of an investment to Barney for $50,000 in three years. If money is worth 6% compounded semiannually, what should Monica accept today?",
+      type: "radio",
       options: [
         {
           content: "$41,872",
@@ -435,6 +455,7 @@ var quizQuestions = [
     {
       question:
         "You want to invest money in a 6% CD account that compounds semiannually. You would like the account to have a balance of $50,000 five years from now. How much must you deposit to accomplish this goal?",
+      type: "radio",
       options: [
         {
           content: "$35,069.",
@@ -460,6 +481,7 @@ var quizQuestions = [
     {
       question:
         "Bill wants to give you a $500,000 gift in seven years. If money is worth 6% compounded semiannually, what is your gift worth today?",
+      type: "radio",
       options: [
         {
           content: "$66,110.",
@@ -530,6 +552,7 @@ var quizQuestions = [
     {
       question:
         "Debbie has $368,882 accumulated in a 401K plan. The fund is earning a low, but safe, 3% per year. The withdrawals will take place annually starting today. How soon will the fund be exhausted if Debbie withdraws $30,000 each year?",
+      type: "radio",
       options: [
         {
           content: "15 years",
@@ -556,6 +579,7 @@ var quizQuestions = [
     {
       question:
         "At the end of the next four years, an investment is expected to generate net cash flows of $8,000, $12,000, $10,000, and $15,000, respectively. What are the (rounded) cash flows worth today if the interest rate is 3%?",
+      type: "radio",
       options: [
         {
           content: "$40,298.",
@@ -571,7 +595,7 @@ var quizQuestions = [
         },
         {
           content: "$43,998.",
-          id: "c2"
+          id: "c4"
         }
       ],
       answer: ["c2"],
@@ -582,6 +606,7 @@ var quizQuestions = [
     {
       question:
         "Micro Brewery borrows $300,000 to be repaid in equal installments over a period of three years. The loan payments are semiannual with the first payment due in six months, and interest is at 6%. What is the amount of each payment?",
+      type: "radio",
       options: [
         {
           content: "$55,379.",
@@ -607,6 +632,7 @@ var quizQuestions = [
     {
       question:
         "A firm leases equipment under a long-term lease (analogous to an installment purchase) that calls for 12 semiannual payments of $39,014.40. The first payment is due at the inception of the lease. The annual rate on the lease is 6%. What is the value of the leased asset at inception of the lease?",
+      type: "radio",
       options: [
         {
           content: "$388,349.",
@@ -633,6 +659,7 @@ var quizQuestions = [
     {
       question:
         "Rosie's Florist borrows $300,000 to be paid off in six years. The loan payments are semiannual with the first payment due in six months, and interest is at 6%. What is the amount of each payment?",
+      type: "radio",
       options: [
         {
           content: "$25,750.",
@@ -658,6 +685,7 @@ var quizQuestions = [
     {
       question:
         "Debbie has $368,882 accumulated in a 401K plan. The fund is earning a low, but safe, 3% per year. The withdrawals will take place annually starting today. How soon will the fund be exhausted if Debbie withdraws $30,000 each year?",
+      type: "radio",
       options: [
         {
           content: "15 years.",
@@ -705,6 +733,7 @@ var quizQuestions = [
     {
       question:
         "Sane Company has received an award which entitles it to receive annual payments of $10,000 at the end of each year for the next ten years. Which of the following is used to calculate the future value of this award?",
+      type: "radio",
       options: [
         {
           content: "Present Value of an Ordinary Annuity of $1",
@@ -722,6 +751,7 @@ var quizQuestions = [
     {
       question:
         "At the end of each quarter, you deposit $500 into an account that pays 12% interest compounded quarterly. How much will you have in the account in three years?",
+      type: "radio",
       options: [
         {
           content: "$7,096.",
@@ -751,6 +781,7 @@ var quizQuestions = [
     {
       question:
         "You deposit $2,000 in an IRA account on April 15, 2018. Assume the account will earn 3% annually. If you repeat this for the next nine years, how much will you have on April 14, 2028?",
+      type: "radio",
       options: [
         {
           content: "$20,600.",
@@ -776,6 +807,7 @@ var quizQuestions = [
     {
       question:
         "Sonia deposits $5,000 in an IRA account on April 15, 2018. Assume the account will earn 3% annually. If she repeats this for the next nine years, how much will she have on April 14, 2028?",
+      type: "radio",
       options: [
         {
           content: "$59,039",
@@ -793,6 +825,7 @@ var quizQuestions = [
     {
       question:
         "Sondra deposits $2,000 in an IRA account on April 15, 2018. Assume the account will earn 3% annually. If she repeats this for the next nine years, how much will she have on deposit on April 14, 2028?",
+      type: "radio",
       options: [
         {
           content: "$20,600",
@@ -821,6 +854,7 @@ var quizQuestions = [
     {
       question:
         "On January 1, 2018, you are considering making an investment that will pay three annual payments of $10,000. The first payment is not expected until December 31, 2020. You are eager to earn 3%. What is the present value of the investment on January 1, 2018?",
+      type: "radio",
       options: [
         {
           content: "$26,662.",
@@ -847,6 +881,7 @@ var quizQuestions = [
     {
       question:
         "On January 1, 2018, you are considering making an investment that will pay three annual payments of $10,000. The first payment is not expected until December 31, 2021. You are eager to earn 3%. What is the present value of the investment on January 1, 2018?",
+      type: "radio",
       options: [
         {
           content: "$28,286.",
@@ -873,6 +908,7 @@ var quizQuestions = [
     {
       question:
         "ABC Corporation will receive $10,000 a year at the end of each of the next five years. Using a discount rate of 14%, the present value of the receipts can be stated as ________.",
+      type: "radio",
       options: [
         {
           content: "PV = $10,000 (Annuity Due PV factor, i = 14%, n = 5)",
@@ -890,6 +926,7 @@ var quizQuestions = [
     {
       question:
         "Donna's Dentist borrows $700,000 to be paid off in six years. The loan payments are semiannual with the first payment due in six months, and interest is at 6%. What is the amount of each payment?",
+      type: "radio",
       options: [
         {
           content: "$70,101",
@@ -907,6 +944,7 @@ var quizQuestions = [
     {
       question:
         "Frank’s Brewery borrows $800,000 to be repaid in equal installments over a period of three years. The loan payments are semiannual with the first payment due in six months, and interest is at 6%. What is the amount of each payment?",
+      type: "radio",
       options: [
         {
           content: "$150,216",
@@ -932,6 +970,7 @@ var quizQuestions = [
     {
       question:
         "ABC Corporation will receive $100,000 a year at the end of each of the next five years. Using a discount rate of 14%, the present value of the receipts can be stated as ________.",
+      type: "radio",
       options: [
         {
           content: "PV = $100,000 (Annuity Due PV factor, i = 14%, n = 5)",
@@ -949,6 +988,7 @@ var quizQuestions = [
     {
       question:
         "Rosie's Florist borrows $300,000 to be paid off in six years. The loan payments are semiannual with the first payment due in six months, and interest is at 6%. What is the amount of each payment?",
+      type: "radio",
       options: [
         {
           content: "$25,750.",
@@ -975,7 +1015,9 @@ var quizQuestions = [
   [
     //10:1
     {
-      question: "",
+      question:
+        "You want to cash in your winning lottery ticket. You can either receive eight $100,000 semiannual payments starting today, or she can receive a single-amount payment today based on a 6% annual interest rate. What is the single-amount payment you can receive today?",
+      type: "radio",
       options: [
         {
           content: "$853,020.",
@@ -1002,6 +1044,7 @@ var quizQuestions = [
     {
       question:
         "Phoebe wants to cash in her winning lottery ticket. She can either receive eight $100,000 semiannual payments starting today, or she can receive a single-amount payment today based on a 6% annual interest rate. What is the single-amount payment she should receive today?",
+      type: "radio",
       options: [
         {
           content: "$724,218",
@@ -1024,6 +1067,7 @@ var quizQuestions = [
     {
       question:
         "Debbie has $368,882 accumulated in a 401K plan. The fund is earning a low, but safe, 3% per year. The withdrawals will take place annually starting today. How soon will the fund be exhausted if Debbie withdraws $30,000 each year?",
+      type: "radio",
       options: [
         {
           content: "14",
@@ -1042,6 +1086,7 @@ var quizQuestions = [
     {
       question:
         "Pavel wants to cash in his winning lottery ticket. He can either receive five $10,000 annual payments starting today, or he can receive one lump-sum payment today based on a 3% annual interest rate. What would be the lump-sum payment?",
+      type: "radio",
       options: [
         {
           content: "$49,195",
@@ -1067,6 +1112,7 @@ var quizQuestions = [
     {
       question:
         "A firm leases equipment under a long-term lease (similar to an installment purchase) that calls for 12 semiannual payments of $50,000. The first payment is due at the beginning of the lease. The annual rate on the lease is 6%. What is the value of the leased asset at inception of the lease?",
+      type: "radio",
       options: [
         {
           content: "$499,631",
@@ -1093,6 +1139,7 @@ var quizQuestions = [
     {
       question:
         "Jose wants to cash in his winning lottery ticket. He can either receive five $5,000 annual payments starting today, or he can receive one lump-sum payment today based on a 3% annual interest rate. What would be the lump-sum payment?",
+      type: "radio",
       options: [
         {
           content: "$23,586.",
@@ -1118,6 +1165,7 @@ var quizQuestions = [
     {
       question:
         "Shelley wants to cash in her winning lottery ticket. She can either receive eight $100,000 semiannual payments starting today, or she can receive a single-amount payment today based on a 6% annual interest rate. What is the single-amount payment she can receive today?",
+      type: "radio",
       options: [
         {
           content: "$853,020.",
@@ -1144,6 +1192,7 @@ var quizQuestions = [
     {
       question:
         "A firm leases equipment under a long-term lease (analogous to an installment purchase) that calls for 12 semiannual payments of $39,014.40. The first payment is due at the inception of the lease. The annual rate on the lease is 6%. What is the value of the leased asset at inception of the lease?",
+      type: "radio",
       options: [
         {
           content: "$388,349.",

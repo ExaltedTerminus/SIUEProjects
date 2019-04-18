@@ -59,7 +59,6 @@ class ModuleSelector extends Component {
   componentWillMount() {
     const store = new Store();
     if (store.get("moduleprog") === undefined) {
-      console.log("new");
       var quizModCopy = this.copyQuizMod();
       store.set("moduleprog", quizModCopy);
     } else {
@@ -72,9 +71,7 @@ class ModuleSelector extends Component {
   }
 
   module_fixup(quizModCopy) {
-    console.log("h");
     for (let i = 0; i < quizModCopy.length; i++) {
-      console.log("o");
       let mod = quizModCopy[i];
       if (mod.curr_mod && mod.score > 0.8) {
         mod.isPassed = true;

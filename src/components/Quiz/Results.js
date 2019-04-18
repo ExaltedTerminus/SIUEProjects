@@ -7,6 +7,7 @@ import Explanation from "./Explanation";
 import "./results.css";
 import styled from "styled-components";
 import VideoComponent from "../VideoPlayer/VideoComponent";
+import QuestionTitle from "./QuestionTitle";
 const Store = window.require("electron-store");
 const TopStyle = styled.div`
   display: flex;
@@ -15,7 +16,6 @@ const TopStyle = styled.div`
 `;
 const Results = props => {
   function renderQuestion(i) {
-    console.log(props.quizQuestions[i]);
     return (
       <React-Fragment>
         <Card>
@@ -25,7 +25,7 @@ const Results = props => {
           />
           <QuestionCount counter={i + 1} total={props.quizQuestions.length} />
 
-          <h2>{props.quizQuestions[i].question}</h2>
+          <QuestionTitle size={2} question={props.quizQuestions[i].question} />
           <ChoiceResults
             answerOptions={props.quizQuestions[i].options}
             selectedValue={props.selectedValue}

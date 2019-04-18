@@ -3,6 +3,11 @@ import QuestionCount from "../Quiz/QuestionCount";
 import QuestionTitle from "../Quiz/QuestionTitle";
 import RadioChkChoices from "./RadioChkChoices";
 import ShortAnswer from "./ShortAnswer";
+import styled from "styled-components";
+const TopStyle = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
 const Quiz = props => {
   function renderOptions() {
@@ -37,8 +42,11 @@ const Quiz = props => {
   }
   return (
     <div key={props.questionId}>
-      <QuestionCount counter={props.currentNumQ} total={props.totalNumQ} />
-      <QuestionTitle question={props.qTitle} />
+      <TopStyle>
+        <QuestionCount counter={props.currentNumQ} total={props.totalNumQ} />
+        {props.modName}
+      </TopStyle>
+      <QuestionTitle size={1} question={props.qTitle} />
       {renderOptions()}
     </div>
   );
