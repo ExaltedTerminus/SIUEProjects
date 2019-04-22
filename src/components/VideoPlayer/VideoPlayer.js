@@ -147,14 +147,6 @@ class Example extends React.Component {
 
           {this.renderWarning()}
         </Card>
-        <Button
-          intent="danger"
-          text="Debug Only Skip Video"
-          onClick={this.handleEnd}
-          disabled={false}
-          fill={false}
-          large={false}
-        />
       </QuestStyle>
     );
   }

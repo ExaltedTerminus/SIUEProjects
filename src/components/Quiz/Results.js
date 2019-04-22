@@ -60,8 +60,6 @@ const Results = props => {
     const store = new Store();
     var row = [];
     var correctness = store.get("modulecorrect")[module_num - 1];
-    console.log("here");
-    console.log(correctness);
     for (let i = 0; i < props.quizQuestions.length; i++) {
       if (correctness[i]) {
         row.push(

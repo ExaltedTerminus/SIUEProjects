@@ -19,7 +19,6 @@ class Routes extends Component {
 
               <Route exact path="/" component={Home} />
               <Route path="/modulecontainer" component={ModuleSelector} />
-              <Route path="/clearstore" component={ClearStore} />
             </div>
           </DivStyle>
         </Router>

@@ -73,7 +73,6 @@ class ModuleSelector extends Component {
   }
 
   module_fixup(quizModCopy) {
-    console.log(quizModCopy);
     var mod;
     for (let i = 0; i < quizModCopy.length; i++) {
       mod = quizModCopy[i];
@@ -88,12 +87,10 @@ class ModuleSelector extends Component {
         }
       }
       if (mod.curr_mod && mod.score >= 0) {
-        console.log("hello?");
         mod.attempted = true;
       }
       quizModCopy[i] = mod;
     }
-    console.log(quizModCopy);
     return quizModCopy;
   }
   copyQuizMod() {
@@ -125,8 +122,6 @@ class ModuleSelector extends Component {
     );
   }
   renderQuiz() {
-    console.log(quizModules[this.state.quizNum - 1].title_name);
-    console.log(this.state.modules);
     return (
       <VideoPlayer
         modules={this.state.modules[this.state.quizNum - 1]}

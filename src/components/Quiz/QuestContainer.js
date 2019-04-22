@@ -218,7 +218,6 @@ class QuestContainer extends Component {
       }
       total_q += 1;
     }
-    console.log(selected_correct);
     var obj = {
       score: num_correct / total_q,
       modulecorrect: selected_correct
@@ -236,8 +235,6 @@ class QuestContainer extends Component {
 
     //if new score is better than current score, record score and what they answered.
     //if (moduleprog[this.state.quizNum - 1].score <= new_score) {
-    console.log("new score better");
-    console.log(moduleprog[this.state.quizNum - 1]);
     moduleprog[this.state.quizNum - 1].score = new_score;
     store.set("moduleprog", moduleprog);
     var quizStates;
@@ -288,7 +285,6 @@ class QuestContainer extends Component {
   renderResult() {
     const store = new Store();
     var selectionsArr = [];
-    //console.log(this.state.selections);
     this.state.selections.forEach(function(state) {
       var stateSel = [];
       state.forEach(function(obj) {
