@@ -8,6 +8,9 @@ const ModButtonStyle = styled.div`
   height: 100%;
   background-color: grey;
 `;
+const Center = styled.div`
+  text-align: center;
+`;
 
 const ModuleButton = props => {
   function determineRender() {
@@ -46,10 +49,11 @@ const ModuleButton = props => {
   }
   function renderInaccessible() {
     return (
-      <Button className="bp3-fill" intent={"danger"}>
-        {" "}
-        Prerequisite Module Not Complete
-      </Button>
+      <Center>
+        <Button className="bp3-fill" intent={"danger"} alignText="center">
+          Prerequisite Module Incomplete
+        </Button>
+      </Center>
     );
   }
 
