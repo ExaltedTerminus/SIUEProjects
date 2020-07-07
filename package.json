@@ -40,7 +40,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "electron": "^4.0.5",
+    "electron": "^9.1.0",
     "electron-packager": "^13.1.0",
     "foreman": "^3.0.1"
   }
